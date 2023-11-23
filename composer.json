@@ -1,0 +1,26 @@
+{
+  "name": "fernandoebert/avisaapp",
+  "description": "A simple class for working with AVISA APP",
+  "type": "library",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "require": {
+    "php": "^7.0 || ^8.0",
+    "guzzlehttp/guzzle": "^7.8",
+    "symfony/deprecation-contracts":  "v2.2.0",
+    "ext-json": "*"
+  },
+  "authors": [
+    {
+      "name": "Fernando Ebert",
+      "email": "fernando@fernandoebert.com.br",
+      "role": "Developer",
+      "homepage": "https://www.fernandoebert.com.br"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "fernandoebert\\avisaApp\\": "src"
+    }
+  }
+}
