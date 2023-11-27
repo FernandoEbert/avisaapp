@@ -29,10 +29,11 @@ class Message extends Sender
 
     /**
      * @param string $token
+     * @param string $version
      */
-    public function __construct(string $token)
+    public function __construct(string $token, string $version)
     {
-        parent::__construct($token);
+        parent::__construct($token, $version);
     }
 
     /**
@@ -55,11 +56,11 @@ class Message extends Sender
         }
 
         $number = $number->numero_formatado;
-        
+
         if (empty($message)){
             throw new Exception("Message is empty, please check your message", $this::EMPTY_MESSAGE);
         }
-        
+
         $send = $this->post("actions/sendMessage", [
             "numero" => $number,
             "mensagem" => $message
@@ -90,5 +91,5 @@ class Message extends Sender
             throw new Exception($e->getMessage());
         }
     }
-    
+
 }

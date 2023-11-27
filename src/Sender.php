@@ -26,17 +26,23 @@ abstract class Sender
     protected string $baseUrl;
 
     /**
+     * @var string
+     */
+    protected string $version;
+
+    /**
      * @param string $token
+     *
      * @param Client|null $client
      */
-    public function __construct(string $token, \GuzzleHttp\Client $client = null)
+    public function __construct(string $token, string $version = null, \GuzzleHttp\Client $client = null)
     {
         if (!$client instanceof \GuzzleHttp\Client){
             $client = new Client();
         }
         $this->client = $client;
         $this->token = $token;
-        $this->baseUrl = "https://www.avisaapp.com.br/api";
+        $this->baseUrl = "https://www.avisaapp.com.br/api".(!empty($version) ? "/{$version}" : "");
     }
 
     /**
