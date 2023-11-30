@@ -13,10 +13,11 @@ class Instance extends Sender
 
     /**
      * @param string $token
+     * @param string $version
      */
-    public function __construct(string $token)
+    public function __construct(string $token, string $version)
     {
-        parent::__construct($token);
+        parent::__construct($token, $version);
     }
 
     /**
