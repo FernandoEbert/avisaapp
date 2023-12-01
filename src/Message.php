@@ -29,11 +29,11 @@ class Message extends Sender
 
     /**
      * @param string $token
-     * @param string $version
+     * @param array|null $options
      */
-    public function __construct(string $token, string $version)
+    public function __construct(string $token, array $options = null)
     {
-        parent::__construct($token, $version);
+        parent::__construct($token, $options);
     }
 
     /**

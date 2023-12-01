@@ -25,24 +25,29 @@ abstract class Sender
      */
     protected string $baseUrl;
 
-    /**
-     * @var string
-     */
-    protected string $version;
+    private ?array $options;
 
     /**
      * @param string $token
-     *
+     * @param array|null $options
      * @param Client|null $client
      */
-    public function __construct(string $token, string $version = null, \GuzzleHttp\Client $client = null)
+    public function __construct(string $token, array $options = null, \GuzzleHttp\Client $client = null)
     {
         if (!$client instanceof \GuzzleHttp\Client){
             $client = new Client();
         }
         $this->client = $client;
         $this->token = $token;
-        $this->baseUrl = "https://www.avisaapp.com.br/api".(!empty($version) ? "/{$version}" : "");
+        $this->options = $options;
+
+        $version = 2;
+        if (isset($this->options['version'])){
+            $version = $this->options['version'];
+        }
+        $version = $this->version($version);
+
+        $this->baseUrl = "https://www.avisaapp.com.br/api{$version}";
     }
 
     /**
@@ -54,7 +59,7 @@ abstract class Sender
     public function get(
         string $endpoint,
         ?array $headers = []
-    ): object
+    ): ?object
     {
         try {
 
@@ -123,6 +128,15 @@ abstract class Sender
 
         }
 
+    }
+
+    protected function version(int $version = 2): string
+    {
+        if (!isset(AvisaApp::AVISAAPP_VERSION[$version])){
+            return AvisaApp::AVISAAPP_VERSION[2];
+        } else {
+            return AvisaApp::AVISAAPP_VERSION[$version];
+        }
     }
 
 }
