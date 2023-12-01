@@ -39,10 +39,11 @@ require __DIR__."/../vendor/autoload.php";
 
 use fernandoebert\avisaApp\AvisaApp;
 
-$avisaApp = new AvisaApp("/your-token/");
+//$avisaApp = new AvisaApp("/use-token/");  // using v2
+$avisaApp = new AvisaApp("/use-token/", ['version' => 1]);  // using v1 (only on paid plan)
 
 try {
-    
+
     $info = $avisaApp
         ->instance()
         ->info();
@@ -63,7 +64,8 @@ require __DIR__."/../vendor/autoload.php";
 
 use fernandoebert\avisaApp\AvisaApp;
 
-$avisaApp = new AvisaApp("/your-token/");
+//$avisaApp = new AvisaApp("/use-token/");  // using v2
+$avisaApp = new AvisaApp("/use-token/", ['version' => 1]);  // using v1 (only on paid plan)
 
 try {
 
@@ -74,9 +76,12 @@ try {
             "Olá, acabei de baixar o componente e estou testando"
         );
 
+    var_dump($send);
+
 } catch (Exception $e) {
-    print_r($e);
+    var_dump($e);
 }
+
 ```
 
 ## Support
