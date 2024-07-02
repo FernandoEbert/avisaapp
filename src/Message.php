@@ -41,7 +41,8 @@ class Message extends Sender
      */
     public function send(
         string $number,
-        string $message
+        string $message,
+        array $file = null
     ): bool
     {
         try {
@@ -61,10 +62,18 @@ class Message extends Sender
             throw new Exception("Message is empty, please check your message", $this::EMPTY_MESSAGE);
         }
 
-        $send = $this->post("actions/sendMessage", [
+        $dataSend = [
             "numero" => $number,
             "mensagem" => $message
-        ]);
+        ];
+
+        if ($file){
+            $dataSend['urlFile']    = $file['url'];
+            $dataSend['type']       = $file['type'];
+            $dataSend['fileName']   = $file['fileName'];
+        }
+
+        $send = $this->post("actions/sendMessage", $dataSend);
 
         if (isset($send->error)){
             throw new Exception($send->error, $this::NOT_SEND_MESSAGE);
