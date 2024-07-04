@@ -66,14 +66,16 @@ class Message extends Sender
             "numero" => $number,
             "mensagem" => $message
         ];
+        $endpoint = "actions/sendMessage";
 
         if ($file){
-            $dataSend['urlFile']    = $file['url'];
+            $dataSend['urlFile']    = $file['urlFile'];
             $dataSend['type']       = $file['type'];
             $dataSend['fileName']   = $file['fileName'];
+            $endpoint = "actions/sendMedia";
         }
 
-        $send = $this->post("actions/sendMessage", $dataSend);
+        $send = $this->post($endpoint, $dataSend);
 
         if (isset($send->error)){
             throw new Exception($send->error, $this::NOT_SEND_MESSAGE);
