@@ -99,7 +99,7 @@ abstract class Sender
         string $endpoint,
         ?array $content,
         ?array $headers = []
-    ): object
+    ): ?object
     {
         try {
 
